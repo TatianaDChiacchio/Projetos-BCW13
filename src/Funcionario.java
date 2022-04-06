@@ -1,19 +1,20 @@
 
-public class Funcionario {
+public abstract class Funcionario {
 	
 	private String nome;
 	private int idade;
 	private double salario;
 	private boolean temFilho;
 	private boolean ativo;
+	protected String categoria;
 	
 	public Funcionario(String nome, int idade, double salario, boolean temFilho) {
 		this.nome = nome;
 		this.idade = idade;
 		this.salario = salario;
 		this.temFilho = temFilho;
+		this.categoria = "";
 		this.setAtivo(true);
-		
 	}
 	
 	public void mostrarDados() {
@@ -23,6 +24,8 @@ public class Funcionario {
 		System.out.println("Idade do funcinário: " + this.idade);
 		System.out.println("Salário do funcioário: R$ " + this.salario);
 		
+		// if ternário
+		System.out.println((this.getTemFilho() ? "tem filho" : "Não tem filho"));
 	}
 	
 	public void informarFilho() {
@@ -58,7 +61,7 @@ public class Funcionario {
 		this.salario = salario;
 	}
 
-	public boolean isTemFilho() {
+	public boolean getTemFilho() {
 		return temFilho;
 	}
 
