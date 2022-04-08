@@ -28,6 +28,8 @@ public class ContaCorrente extends Conta {
 	@Override
 	public void depositar(double valor) {
 		
+		this.setSaldo(this.getSaldo() + valor);
+		
 	}
 
 }

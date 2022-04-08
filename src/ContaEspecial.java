@@ -39,7 +39,7 @@ public class ContaEspecial extends Conta{
 			this.setSaldo(this.getSaldo() - valor);
 			System.out.println("Saque realizado com suceso");
 			System.out.println("Seu novo saldo é de: " + this.getSaldo());
-		}else if((this.getSaldo() + this.getSaldoLimite()) >= valor){
+		}else if((this.getSaldo() + this.getSaldoLimite()) >= valor || (this.getSaldoLimite() >= valor)){
 			this.setSaldoLimite(this.getLimite() - (valor - this.getSaldo()));
 			this.setSaldo(this.getSaldo() - valor);
 			System.out.println("Saque realizado com suceso");
@@ -50,10 +50,28 @@ public class ContaEspecial extends Conta{
 		}
 		
 	}
+	
+	// supondo um limite de 1000
+	// estou utilizando 300 do limite
+	// saldoLimite 700
+	// saldo da Conta -300
+	// depositar 800 -> tirar o valor que estou devendo do limite -> sobra 500 para somar no saldo
 
 	@Override
 	public void depositar(double valor) {
-		
+		System.out.println("----------------------Depósito---------------------------");
+		if(this.getSaldo() >= 0) {
+			this.setSaldo(this.getSaldo() + valor);
+		}else {
+			valor = valor - (this.getLimite() - this.getSaldoLimite());
+			this.setSaldo(valor);
+			
+			this.setSaldoLimite(this.getSaldo() >= 0  ? this.getLimite() : (-valor + this.getSaldoLimite()));
+			
+		}
+		System.out.println("Depósito efetuado. Seu novo saldo é: " + this.getSaldo());
+		System.out.println("Seu novo saldo do limite é: " + this.getSaldoLimite());
+			
 	}
 	
 	//limite ->1000  - aumentar ->2000
@@ -71,7 +89,6 @@ public class ContaEspecial extends Conta{
 		
 		System.out.println("Limite: " + this.getLimite());
 		System.out.println("Saldo do Limite: " + this.getSaldoLimite());
-		
 	}
 
 	public double getSaldoLimite() {
